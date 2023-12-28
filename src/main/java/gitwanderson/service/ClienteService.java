@@ -8,12 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteService {
 
-    private ClienteRepository clienteRepository;
-
     @Autowired
-    public ClienteService( ClienteRepository clienteRepository){
-        this.clienteRepository = clienteRepository;
-    }
+    private ClienteRepository clienteRepository;
 
     public void salvarCliente(Cliente cliente){
         validarCliente(cliente);
