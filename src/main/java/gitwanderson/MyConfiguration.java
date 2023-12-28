@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class MinhaConfiguration {
+public class MyConfiguration {
 
     // Criando uma configuração que pode ser usada em qualquer parte do codigo
     // Essa config pode ser uma conexao com a base de dados etc
