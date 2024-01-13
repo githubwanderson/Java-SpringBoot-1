@@ -1,14 +1,9 @@
 package gitwanderson;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
-@Configuration
-// Posso colocar uma configuracao exclusiva para um profile add a linha abaixo
-@Profile("development")
+@Development
 public class MyConfiguration {
 
     @Bean
