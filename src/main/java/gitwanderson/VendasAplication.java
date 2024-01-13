@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class VendasAplication {
 
-    @Autowired
-    @Qualifier("applicationName")
-    private String applicationName;
+//  Add onde esta o anotation @Bean com o nome status (MyConfiguration)
+//    @Autowired
+//    @Qualifier("status")
+//    private String status;
 
 //  Esta pegando os valores de resource->application.properties
     @Value("${application.name}")
-    private String status;
-    
+    private String applicationName;
+
     @GetMapping("/hello")
     public String helloWorld() {
-        return applicationName + ' ' + status;
+        return applicationName;
     }
 
 //  Digite psvm para auto completar
