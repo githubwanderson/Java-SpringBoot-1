@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteService {
 
+//  Cliente service vai precisar da classe ClienteRepository
     @Autowired
     private ClienteRepository clienteRepository;
 
