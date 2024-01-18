@@ -44,6 +44,31 @@ public class VendasAplication {
 
             List<Cliente> listClientes = clienteRepository.listar();
             listClientes.forEach(System.out::println);
+
+            listClientes.forEach( c -> {
+                c.setNome(c.getNome() + " Atualizado");
+                clienteRepository.update(c);
+            });
+
+            listClientes = clienteRepository.listar();
+            listClientes.forEach(System.out::println);
+
+            listClientes = clienteRepository.listarByName("Joao");
+            listClientes.forEach(System.out::println);
+
+            if(listClientes.isEmpty()){
+                System.out.println("Nenhum cliente encontrado.");
+            } else  {
+                listClientes.forEach(c -> {
+                    clienteRepository.deleteById(c.getId());
+                });
+            }
+
+            listClientes = clienteRepository.listar();
+            listClientes.forEach(System.out::println);
+
+
+
         };
     }
 

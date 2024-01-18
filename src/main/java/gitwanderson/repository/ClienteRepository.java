@@ -19,6 +19,7 @@ public class ClienteRepository {
     private static String SELECT_ALL = "select * from cliente";
     private static String UPDATE = "update cliente set nome = ? where id = ?";
     private static String DELETE = "delete cliente where id = ?";
+    private static String SELECT = "select * from cliente where id = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -40,6 +41,10 @@ public class ClienteRepository {
     public void deleteById(Integer id){
         jdbcTemplate.update(DELETE, new Object[]{id});
     }
+
+//    public Cliente getById(Integer id){
+//        return jdbcTemplate.update(SELECT, new Object[]{id}, getClienteMapper());
+//    }
 
     public List<Cliente> listarByName(String nome){
         return jdbcTemplate.query(SELECT_ALL.concat(" where nome like ? "), new Object[]{"%" + nome + "%"}, getClienteMapper());
