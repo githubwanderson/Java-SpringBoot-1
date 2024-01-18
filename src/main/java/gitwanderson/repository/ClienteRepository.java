@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,8 +26,12 @@ public class ClienteRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private EntityManager entityManager;
+
+    @Transactional
     public Cliente save(Cliente cliente) {
-        jdbcTemplate.update( INSERT, new Object[]{cliente.getNome()} );
+        entityManager.persist(cliente);
         return cliente;
     }
 
