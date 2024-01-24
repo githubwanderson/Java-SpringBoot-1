@@ -42,18 +42,18 @@ public class VendasAplication {
 //          usando o contrutor
             clienteRepository.save(new Cliente("Lucas"));
 
-            List<Cliente> listClientes = clienteRepository.listar();
+            List<Cliente> listClientes = clienteRepository.findAll();
             listClientes.forEach(System.out::println);
 
             listClientes.forEach( c -> {
                 c.setNome(c.getNome() + " Atualizado");
-                clienteRepository.update(c);
+                clienteRepository.save(c);
             });
 
-            listClientes = clienteRepository.listar();
+            listClientes = clienteRepository.findAll();
             listClientes.forEach(System.out::println);
 
-            listClientes = clienteRepository.listarByName("Joao");
+            listClientes = clienteRepository.findByNomeLike("Joao");
             listClientes.forEach(System.out::println);
 
             if(listClientes.isEmpty()){
@@ -64,7 +64,7 @@ public class VendasAplication {
                 });
             }
 
-            listClientes = clienteRepository.listar();
+            listClientes = clienteRepository.findAll();
             listClientes.forEach(System.out::println);
 
 

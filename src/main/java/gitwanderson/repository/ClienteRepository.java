@@ -1,75 +1,25 @@
 package gitwanderson.repository;
 
 import gitwanderson.entity.Cliente;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-@Repository
-public class ClienteRepository {
 
-    private static String INSERT = "insert into cliente (nome) values (?)";
-    private static String SELECT_ALL = "select * from cliente";
-    private static String UPDATE = "update cliente set nome = ? where id = ?";
-    private static String DELETE = "delete cliente where id = ?";
-    private static String SELECT = "select * from cliente where id = ?";
+    List<Cliente> findByNomeLike(String nome);
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+//    QueryMethods
+    List<Cliente> findByNomeOrId(String nome, Integer Id);
 
-    @Autowired
-    private EntityManager entityManager;
+//    Colocar os parametros na ordem da declaração
+    List<Cliente> findByNomeOrIdOrderById(String nome, Integer Id);
 
-    @Transactional
-    public Cliente save(Cliente cliente) {
-        entityManager.persist(cliente);
-        return cliente;
-    }
+//  Retornando apenas um registro, caso tenha mais de um sera gerado um exception
+    Cliente findOneByNome(String nome);
 
-    @Transactional
-    public Cliente update(Cliente cliente){
-        entityManager.merge(cliente);
-        return cliente;
-    }
+    boolean existsByNome(String nome);
 
-    @Transactional
-    public void delete(Cliente cliente){
-        if(!entityManager.contains(cliente)){
-            cliente = entityManager.merge(cliente);
-        }
-        entityManager.remove(cliente);
-    }
 
-    @Transactional
-    public void deleteById(Integer id){
-        Cliente cliente = entityManager.find(Cliente.class, id);
-        delete(cliente);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Cliente> listarByName(String nome){
-        // Select referenciando a classe
-        String jpql = " select c from Cliente c where c.nome like :nome ";
-        // Passo a instrução e a classe referenciada que vai me retornar um typedquery (query tipada para entidade Cliente)
-        TypedQuery<Cliente> query = entityManager.createQuery(jpql, Cliente.class);
-        query.setParameter("nome","%" + nome + "%");
-        return query.getResultList();
-    }
-
-    @Transactional(readOnly = true)
-    public List<Cliente> listar(){
-        return entityManager
-                .createQuery("from Cliente", Cliente.class)
-                .getResultList();
-    }
 }
