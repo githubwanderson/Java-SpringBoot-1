@@ -1,6 +1,7 @@
 package gitwanderson.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "cliente")
@@ -13,6 +14,12 @@ public class Cliente {
 
     @Column(name = "nome")
     private String nome;
+
+    // Listar os pedidos de um cliente
+    // 1 para N Um cliente pode ter muitos pedidos
+    // add mappedBy para informar qual entidade de Pedido vai ser mapeada aqui
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos; // Collection or list ou set
 
     public Cliente() {
     }

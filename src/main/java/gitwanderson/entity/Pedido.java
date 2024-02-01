@@ -1,6 +1,7 @@
 package gitwanderson.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -12,11 +13,15 @@ public class Pedido {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "cliente_id")
+    // Add um relacionamento
+    // N p 1 Muitos pedidos para um cliente
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @Column(name = "total")
-    private Float total;
+    // Informando que podemos ter 20 casas e duas decimais que salva 100.00
+    @Column(name = "total", length = 20, precision = 2)
+    private BigDecimal total;
 
     @Column(name = "data_pedido")
     private LocalDate data;
