@@ -3,6 +3,7 @@ package gitwanderson.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido")
@@ -26,6 +27,11 @@ public class Pedido {
     @Column(name = "data_pedido")
     private LocalDate data;
 
+    // Para retornar uma lista com os itens do pedido
+    // mappedBy vamos colocar o item que representa o pedido
+    @OneToMany(mappedBy = "pedido_id")
+    private List<ItemPedido> itens;
+
     public Integer getId() {
         return id;
     }
@@ -42,11 +48,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Float getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -56,5 +62,13 @@ public class Pedido {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
     }
 }
