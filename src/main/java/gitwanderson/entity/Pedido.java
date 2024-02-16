@@ -29,7 +29,7 @@ public class Pedido {
 
     // Para retornar uma lista com os itens do pedido
     // mappedBy vamos colocar o item que representa o pedido
-    @OneToMany(mappedBy = "pedido_id")
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
 
     public Integer getId() {
