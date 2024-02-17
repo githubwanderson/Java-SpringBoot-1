@@ -27,14 +27,18 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 //    Colocar os parametros na ordem da declaração
     List<Cliente> findByNomeOrIdOrderById(String nome, Integer Id);
 
-//  Retornando apenas um registro, caso tenha mais de um sera gerado um exception
+//    Retornando apenas um registro, caso tenha mais de um sera gerado um exception
     Cliente findOneByNome(String nome);
 
     boolean existsByNome(String nome);
 
 //    Delete tem que usar @Modifying para informar que não é consulta
     @Modifying
-    void deleteByNome(String nome);     
+    void deleteByNome(String nome);
+
+//    Buscar pedidos de um cliente
+    @Query( " select c from Cliente c left join fetch c.pedidos where c.id = :id " )
+    Cliente findClienteFetchPedido( @Param("id") Integer id );
 
 
 }

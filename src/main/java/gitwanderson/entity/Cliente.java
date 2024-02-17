@@ -15,11 +15,24 @@ public class Cliente {
     @Column(name = "nome")
     private String nome;
 
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     // Listar os pedidos de um cliente
     // 1 para N Um cliente pode ter muitos pedidos
     // add mappedBy para informar qual entidade de Pedido vai ser mapeada aqui
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente" , fetch = FetchType.LAZY )
     private Set<Pedido> pedidos; // Collection or list ou set
+
+    // FetchType.EAGER sempre que listar um cliente sera listado tambem os pedidos desse cliente // NAO é Bom
+    // FetchType.LAZY default
+    // @OneToMany(mappedBy = "cliente" , fetch = FetchType.EAGER )
+    // private Set<Pedido> pedidos; // Collection or list ou set
 
     public Cliente() {
     }
@@ -56,4 +69,6 @@ public class Cliente {
                 ", nome='" + nome + '\'' +
                 '}';
     }
+
+
 }

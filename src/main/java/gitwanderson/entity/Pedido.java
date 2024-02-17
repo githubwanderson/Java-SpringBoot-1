@@ -21,7 +21,7 @@ public class Pedido {
     private Cliente cliente;
 
     // Informando que podemos ter 20 casas e duas decimais que salva 100.00
-    @Column(name = "total", length = 20, precision = 2)
+    @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
 
     @Column(name = "data_pedido")
@@ -70,5 +70,14 @@ public class Pedido {
 
     public void setItens(List<ItemPedido> itens) {
         this.itens = itens;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", total=" + total +
+                ", data=" + data +
+                '}';
     }
 }
