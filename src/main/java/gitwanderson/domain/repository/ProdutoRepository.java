@@ -1,6 +1,6 @@
-package gitwanderson.repository;
+package gitwanderson.domain.repository;
 
-import gitwanderson.entity.Produto;
+import gitwanderson.domain.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProdutoRepository extends JpaRepository<Produto,Integer> {

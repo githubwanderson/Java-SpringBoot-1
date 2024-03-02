@@ -1,7 +1,7 @@
-package gitwanderson.repository;
+package gitwanderson.domain.repository;
 
-import gitwanderson.entity.Cliente;
-import gitwanderson.entity.Pedido;
+import gitwanderson.domain.entity.Cliente;
+import gitwanderson.domain.entity.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

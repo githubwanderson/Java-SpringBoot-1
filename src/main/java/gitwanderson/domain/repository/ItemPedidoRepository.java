@@ -1,6 +1,6 @@
-package gitwanderson.repository;
+package gitwanderson.domain.repository;
 
-import gitwanderson.entity.ItemPedido;
+import gitwanderson.domain.entity.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // SimpleJpaRepository é uma class que o JpaRepository extend e nela contem os metodos mais simples (save, update, delete, list)

@@ -1,7 +1,7 @@
-package gitwanderson.service;
+package gitwanderson.domain.service;
 
-import gitwanderson.entity.Cliente;
-import gitwanderson.repository.ClienteRepository;
+import gitwanderson.domain.entity.Cliente;
+import gitwanderson.domain.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
