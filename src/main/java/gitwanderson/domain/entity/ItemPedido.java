@@ -1,4 +1,4 @@
-package gitwanderson.entity;
+package gitwanderson.domain.entity;
 
 import javax.persistence.*;
 
