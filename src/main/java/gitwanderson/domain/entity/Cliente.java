@@ -1,5 +1,7 @@
 package gitwanderson.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -26,6 +28,7 @@ public class Cliente {
     // Listar os pedidos de um cliente
     // 1 para N Um cliente pode ter muitos pedidos
     // add mappedBy para informar qual entidade de Pedido vai ser mapeada aqui
+    @JsonIgnore // Ignorar essa propriedade
     @OneToMany(mappedBy = "cliente" , fetch = FetchType.LAZY )
     private Set<Pedido> pedidos; // Collection or list ou set
 

@@ -11,16 +11,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class VendasAplication {
 
-    @Bean // Para reconhecer como um comando gerenciavel
-    public CommandLineRunner init(
-            @Autowired ClienteRepository clienteRepository
-            ){
-        return args -> {
-            Cliente c = new Cliente("Wandinelson");
-            clienteRepository.save(c);
-        };
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(VendasAplication.class, args);
     }
