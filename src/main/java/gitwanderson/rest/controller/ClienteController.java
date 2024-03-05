@@ -47,7 +47,22 @@ public class ClienteController {
         return ResponseEntity.notFound().build();
     }
 
-    
+    // PUT atualiza integralmente a entity
+    // Se passar algum campo null então deve ser salvo null
+    @RequestMapping(value = "/cliente/{id}", method = RequestMethod.PUT )
+    @ResponseBody
+    public ResponseEntity putCliente( @PathVariable("id") Integer id, @RequestBody Cliente cliente ){
+
+        return clienteRepository
+                    .findById(id)
+                    .map( clienteFind -> {
+                        cliente.setId(clienteFind.getId());
+                        clienteRepository.save(cliente);
+                        return ResponseEntity.noContent().build();
+                    } ).orElseGet( () -> ResponseEntity.notFound().build() );
+    }
+
+
 
 
 
