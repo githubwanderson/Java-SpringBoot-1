@@ -14,8 +14,11 @@ public class Cliente {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", length = 100)
     private String nome;
+
+    @Column(name = "cpf", length = 11)
+    private String cpf;
 
     public Set<Pedido> getPedidos() {
         return pedidos;
@@ -63,6 +66,14 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override
