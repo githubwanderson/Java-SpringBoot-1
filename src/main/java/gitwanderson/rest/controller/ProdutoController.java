@@ -1,4 +1,4 @@
-package gitwanderson.domain.service;
+package gitwanderson.rest.controller;
 
 import gitwanderson.domain.entity.Produto;
 import gitwanderson.domain.repository.ProdutoRepository;
