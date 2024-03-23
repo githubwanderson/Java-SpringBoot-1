@@ -1,4 +1,5 @@
 package gitwanderson.rest.dto;
+import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
   ]
 }
 */
-
+@Data
 public class pedidoDTO {
     private Integer cliente;
     private BigDecimal total;
