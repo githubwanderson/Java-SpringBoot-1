@@ -8,12 +8,11 @@ import gitwanderson.domain.repository.ClienteRepository;
 import gitwanderson.domain.repository.ItemPedidoRepository;
 import gitwanderson.domain.repository.PedidoRepository;
 import gitwanderson.domain.repository.ProdutoRepository;
+import gitwanderson.exception.RegraNegocioException;
 import gitwanderson.rest.dto.ItemPedidoDTO;
 import gitwanderson.rest.dto.PedidoDTO;
-import gitwanderson.exception.PedidoException;
 import gitwanderson.service.PedidoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
@@ -48,26 +47,22 @@ public class PedidoServiceImpl implements PedidoService {
 
         Cliente c = clienteRepository
                     .findById(idCliente)
-                    .orElseThrow(()-> new PedidoException("Código cliente invalido"));
+                    .orElseThrow(()-> new RegraNegocioException("Código cliente invalido"));
 
         Pedido p = new Pedido();
         p.setTotal(dto.getTotal());
         p.setData(LocalDate.now());
         p.setCliente(c);
-
-
         List<ItemPedido> itensPedido = converterItens(p, dto.getItems());
         pedidoRepository.save(p);
-
         itemPedidoRepository.saveAll(itensPedido);
-
         p.setItens(itensPedido);
         return p;
     }
 
     private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDTO> items){
         if(items.isEmpty()){
-            throw new PedidoException("Não é possivel realizar um pedido sem itens");
+            throw new RegraNegocioException("Não é possivel realizar um pedido sem itens");
         }
 
         return items
@@ -79,7 +74,7 @@ public class PedidoServiceImpl implements PedidoService {
                     Integer idProduto = itemDto.getProduto();
                     Produto produto = produtoRepository
                             .findById(idProduto)
-                            .orElseThrow(()-> new PedidoException("Produto não encontrado [" + itemDto.getProduto() + "]"));
+                            .orElseThrow(()-> new RegraNegocioException("Produto não encontrado [" + idProduto + "]"));
 
                     ItemPedido itemPedido = new ItemPedido();
                     itemPedido.setQuantidade(itemDto.getQuantidade());
