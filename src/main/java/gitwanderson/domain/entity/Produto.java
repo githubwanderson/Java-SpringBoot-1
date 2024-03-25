@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -22,4 +22,9 @@ public class Produto {
 
     @Column(name = "preco")
     private Float preco;
+
+    public Produto(String descricao, Float preco){
+        this.descricao = descricao;
+        this.preco = preco;
+    }
 }

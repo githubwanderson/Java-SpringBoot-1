@@ -8,9 +8,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "cliente")
 public class Cliente {
 
@@ -49,8 +49,8 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public Cliente(Integer id, String nome) {
-        this.id = id;
+    public Cliente(String nome, String cpf) {
         this.nome = nome;
+        this.cpf = cpf;
     }
 }

@@ -1,4 +1,7 @@
-package gitwanderson.rest.dto.exception;
+package gitwanderson.exception;
 
 public class PedidoException extends RuntimeException {
+    public PedidoException(String message) {
+        super(message);
+    }
 }

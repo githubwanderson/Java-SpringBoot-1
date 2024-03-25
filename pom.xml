@@ -56,6 +56,12 @@
         </dependency>
         -->
 
+        <!-- Dev tools ao recompila Ctrl+F9 ele reinicia o servidor automaticamente -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
