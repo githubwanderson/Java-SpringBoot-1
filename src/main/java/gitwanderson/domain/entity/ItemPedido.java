@@ -1,8 +1,11 @@
 package gitwanderson.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 
 @Data
@@ -18,6 +21,7 @@ public class ItemPedido {
     private Integer id;
 
     // muitos itens pedido para um pedido
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
