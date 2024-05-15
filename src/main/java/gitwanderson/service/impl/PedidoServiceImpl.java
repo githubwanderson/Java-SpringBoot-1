@@ -4,6 +4,7 @@ import gitwanderson.domain.entity.Cliente;
 import gitwanderson.domain.entity.ItemPedido;
 import gitwanderson.domain.entity.Pedido;
 import gitwanderson.domain.entity.Produto;
+import gitwanderson.domain.enums.StatusPedido;
 import gitwanderson.domain.repository.ClienteRepository;
 import gitwanderson.domain.repository.ItemPedidoRepository;
 import gitwanderson.domain.repository.PedidoRepository;
@@ -58,6 +59,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedidoRepository.save(p);
         itemPedidoRepository.saveAll(itensPedido);
         p.setItens(itensPedido);
+        p.setStatus(StatusPedido.REALIZADO);
         return p;
     }
 

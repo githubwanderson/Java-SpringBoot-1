@@ -1,5 +1,6 @@
 package gitwanderson.rest.dto;
 
+import gitwanderson.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +23,6 @@ public class InformacoesPedidoDTO {
     private String nomeCliente;
     private BigDecimal total;
     private LocalDate data;
+    private StatusPedido status;
     private List<InformacoesItensPedidoDTO> items;
 }

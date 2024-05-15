@@ -1,5 +1,6 @@
 package gitwanderson.domain.entity;
 
+import gitwanderson.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,4 +38,9 @@ public class Pedido {
     // mappedBy vamos colocar o item que representa o pedido
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
+
+    // @Enumerated(EnumType.STRING) Para guardar no banco a string do enum
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 }

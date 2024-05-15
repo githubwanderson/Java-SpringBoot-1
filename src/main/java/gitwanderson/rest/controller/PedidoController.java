@@ -47,6 +47,7 @@ public class PedidoController {
                 .nomeCliente(pedido.getCliente().getNome())
                 .data(pedido.getData())
                 .total(pedido.getTotal())
+                .status(pedido.getStatus())
                 .items(convertItemsPedido(pedido.getItens()))
                 .build();
     }

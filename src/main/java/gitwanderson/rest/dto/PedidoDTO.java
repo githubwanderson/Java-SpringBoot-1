@@ -1,4 +1,5 @@
 package gitwanderson.rest.dto;
+import gitwanderson.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ import java.util.List;
 public class PedidoDTO {
     private Integer cliente;
     private BigDecimal total;
+    private StatusPedido status;
     private List<ItemPedidoDTO> items;
 }
