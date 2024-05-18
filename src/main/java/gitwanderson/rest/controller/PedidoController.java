@@ -2,6 +2,7 @@ package gitwanderson.rest.controller;
 
 import gitwanderson.domain.entity.ItemPedido;
 import gitwanderson.domain.entity.Pedido;
+import gitwanderson.rest.dto.StatusPedidoDTO;
 import gitwanderson.rest.dto.InformacoesItensPedidoDTO;
 import gitwanderson.rest.dto.InformacoesPedidoDTO;
 import gitwanderson.rest.dto.PedidoDTO;
@@ -26,9 +27,22 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer save(@RequestBody PedidoDTO dto ){
-        Pedido p = pedidoService.save(dto);
+    public Integer create(@RequestBody PedidoDTO dto ){
+        Pedido p = pedidoService.salvar(dto);
         return p.getId();
+    }
+
+    /*
+    @PutMapping("{id}")
+    Atualiza todas as entidades do objeto
+    */
+
+    @PatchMapping("{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void updateStatus(
+            @RequestBody StatusPedidoDTO statusPedidoDTO,
+            @PathVariable Integer id){
+        pedidoService.updateStatusPedido(statusPedidoDTO.getStatusPedido(), id);
     }
 
     @GetMapping("{id}")
@@ -67,6 +81,4 @@ public class PedidoController {
                         .build())
                 .collect(Collectors.toList());
     }
-
-
 }

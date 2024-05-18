@@ -10,6 +10,7 @@ import gitwanderson.domain.repository.ItemPedidoRepository;
 import gitwanderson.domain.repository.PedidoRepository;
 import gitwanderson.domain.repository.ProdutoRepository;
 import gitwanderson.exception.RegraNegocioException;
+import gitwanderson.rest.dto.StatusPedidoDTO;
 import gitwanderson.rest.dto.ItemPedidoDTO;
 import gitwanderson.rest.dto.PedidoDTO;
 import gitwanderson.service.PedidoService;
@@ -44,7 +45,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public Pedido save(PedidoDTO dto) {
+    public Pedido salvar(PedidoDTO dto) {
         Integer idCliente = dto.getCliente();
 
         Cliente c = clienteRepository
@@ -67,6 +68,18 @@ public class PedidoServiceImpl implements PedidoService {
     public Optional<Pedido> obterPedidoCompleto(Integer Id) {
         return pedidoRepository.findByIdFetchItens(Id);
     }
+
+    @Override
+    public void updateStatusPedido(StatusPedido statusPedido, Integer id) {
+        pedidoRepository
+                .findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidoRepository.save(pedido);
+                })
+                .orElseThrow(() -> new RegraNegocioException("error"));
+    }
+
 
     private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDTO> items){
         if(items.isEmpty()){

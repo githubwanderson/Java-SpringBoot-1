@@ -2,6 +2,8 @@ package gitwanderson.domain.repository;
 
 import gitwanderson.domain.entity.Cliente;
 import gitwanderson.domain.entity.Pedido;
+import gitwanderson.domain.enums.StatusPedido;
+import gitwanderson.rest.dto.StatusPedidoDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
