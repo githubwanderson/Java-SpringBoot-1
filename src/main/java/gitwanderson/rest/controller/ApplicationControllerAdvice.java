@@ -1,5 +1,6 @@
 package gitwanderson.rest.controller;
 
+import gitwanderson.exception.PedidoNaoEncontradoException;
 import gitwanderson.exception.RegraNegocioException;
 import gitwanderson.rest.ApiErros;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,11 @@ public class ApplicationControllerAdvice {
     public ApiErros handleRegraNegocioException(RegraNegocioException ex){
         String msg = ex.getMessage();
         return new ApiErros(msg);
+    }
+
+    @ExceptionHandler(PedidoNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErros handlePedidoNaoEncontradoException(PedidoNaoEncontradoException ex){
+        return new ApiErros(ex.getMessage());
     }
 }

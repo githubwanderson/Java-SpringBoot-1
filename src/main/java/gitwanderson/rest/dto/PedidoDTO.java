@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PedidoDTO {
     private Integer cliente;
-    private BigDecimal total;
+//    private BigDecimal total;
     private StatusPedido status;
     private List<ItemPedidoDTO> items;
 }

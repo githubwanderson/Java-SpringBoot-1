@@ -9,6 +9,7 @@ import gitwanderson.domain.repository.ClienteRepository;
 import gitwanderson.domain.repository.ItemPedidoRepository;
 import gitwanderson.domain.repository.PedidoRepository;
 import gitwanderson.domain.repository.ProdutoRepository;
+import gitwanderson.exception.PedidoNaoEncontradoException;
 import gitwanderson.exception.RegraNegocioException;
 import gitwanderson.rest.dto.StatusPedidoDTO;
 import gitwanderson.rest.dto.ItemPedidoDTO;
@@ -17,9 +18,12 @@ import gitwanderson.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +49,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public Pedido salvar(PedidoDTO dto) {
+    public Pedido create(PedidoDTO dto) {
         Integer idCliente = dto.getCliente();
 
         Cliente c = clienteRepository
@@ -53,10 +57,18 @@ public class PedidoServiceImpl implements PedidoService {
                     .orElseThrow(()-> new RegraNegocioException("Código cliente invalido"));
 
         Pedido p = new Pedido();
-        p.setTotal(dto.getTotal());
         p.setData(LocalDate.now());
         p.setCliente(c);
         List<ItemPedido> itensPedido = converterItens(p, dto.getItems());
+        /* SE FOSSE DOUBLE
+        double total = itensPedido.stream()
+           .map(i -> i.getProduto().getPreco() * i.getQuantidade())
+           .reduce(0.0, Double::sum);
+        */
+
+        p.setTotal( itensPedido.stream()
+                .map(item -> item.getProduto().getPreco().multiply(BigDecimal.valueOf(item.getQuantidade())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add));
         pedidoRepository.save(p);
         itemPedidoRepository.saveAll(itensPedido);
         p.setItens(itensPedido);
@@ -70,6 +82,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
+    @Transactional
     public void updateStatusPedido(StatusPedido statusPedido, Integer id) {
         pedidoRepository
                 .findById(id)
@@ -77,7 +90,7 @@ public class PedidoServiceImpl implements PedidoService {
                     pedido.setStatus(statusPedido);
                     return pedidoRepository.save(pedido);
                 })
-                .orElseThrow(() -> new RegraNegocioException("error"));
+                .orElseThrow(() -> new PedidoNaoEncontradoException());
     }
 
 

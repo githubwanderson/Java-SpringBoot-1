@@ -6,7 +6,7 @@ import gitwanderson.rest.dto.PedidoDTO;
 import java.util.Optional;
 
 public interface PedidoService {
-    Pedido salvar(PedidoDTO dto);
+    Pedido create(PedidoDTO dto);
 
     Optional<Pedido> obterPedidoCompleto(Integer Id);
 
