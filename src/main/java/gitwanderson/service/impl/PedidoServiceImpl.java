@@ -11,7 +11,6 @@ import gitwanderson.domain.repository.PedidoRepository;
 import gitwanderson.domain.repository.ProdutoRepository;
 import gitwanderson.exception.PedidoNaoEncontradoException;
 import gitwanderson.exception.RegraNegocioException;
-import gitwanderson.rest.dto.StatusPedidoDTO;
 import gitwanderson.rest.dto.ItemPedidoDTO;
 import gitwanderson.rest.dto.PedidoDTO;
 import gitwanderson.service.PedidoService;
@@ -23,7 +22,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
