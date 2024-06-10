@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
@@ -21,10 +23,12 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
-    @NotEmpty(message = "Nome não pode ser null")
+    @NotEmpty(message = "Nome não pode ser vazio")
     private String nome;
 
     @Column(name = "cpf", length = 11)
+    @NotEmpty(message = "CPF não pode ser vazio")
+    @CPF(message = "CPF inválido")
     private String cpf;
 
     public Set<Pedido> getPedidos() {
