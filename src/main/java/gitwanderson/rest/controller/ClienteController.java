@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,7 +46,7 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     // Retorno padrão é 200 mas se quiser retornar um status diferente então deve se colocar responsestatus
-    public Cliente saveCliente(@RequestBody Cliente cliente) {
+    public Cliente saveCliente(@RequestBody @Valid Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
