@@ -67,7 +67,7 @@ public class ClienteController {
     // PUT atualiza integralmente a entity // Se passar algum campo null ou não passar todas as propriedades então sera salvo null
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCliente(@PathVariable("id") Integer id, @RequestBody Cliente cliente) {
+    public void updateCliente(@PathVariable("id") Integer id, @RequestBody @Valid Cliente cliente) {
         clienteRepository
                 .findById(id)
                 .map(clienteFind -> {

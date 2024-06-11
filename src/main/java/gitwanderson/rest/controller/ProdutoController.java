@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,13 +29,13 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus( HttpStatus.CREATED )
-    public Produto save( @RequestBody Produto produto ){
+    public Produto save( @RequestBody @Valid Produto produto ){
         return produtoRepository.save(produto);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus( HttpStatus.NO_CONTENT )
-    public void update( @PathVariable Integer id, @RequestBody Produto produto ){
+    public void update( @PathVariable Integer id, @RequestBody @Valid Produto produto ){
         produtoRepository.findById(id)
                 .map( produtoFinded -> {
                     produto.setId( produtoFinded.getId() );
