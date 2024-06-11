@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer create(@RequestBody PedidoDTO dto ){
+    public Integer create(@RequestBody @Valid PedidoDTO dto ){
         Pedido p = pedidoService.create(dto);
         return p.getId();
     }
