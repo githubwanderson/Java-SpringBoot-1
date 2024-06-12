@@ -21,11 +21,11 @@ public class Produto {
     private Integer id;
 
     @Column(name = "descricao")
-    @NotEmpty(message = "Descrição não pode ser vazio.")
+    @NotEmpty(message = "{campo.descricao.obrigatorio}")
     private String descricao;
 
     @Column(name = "preco")
-    @NotNull(message = "Valor/preço não informado.")
+    @NotNull(message = "{campo.preco.obrigatorio}")
     private BigDecimal preco;
 
     public Produto(String descricao, BigDecimal preco){

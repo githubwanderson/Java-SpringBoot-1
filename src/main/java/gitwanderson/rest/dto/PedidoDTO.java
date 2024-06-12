@@ -25,10 +25,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PedidoDTO {
-    @NotNull(message = "Cliente não informado.")
+    @NotNull(message = "{campo.codigo-cliente.obrigatorio}")
     private Integer cliente;
 //    private BigDecimal total;
     private StatusPedido status;
-    @NotEmptyList(message = "Para um pedido é necessario ao menos 1 item.")
+    @NotEmptyList(message = "{campo.items-pedido.obrigatorio}")
     private List<ItemPedidoDTO> items;
 }
